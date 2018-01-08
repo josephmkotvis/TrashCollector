@@ -3,19 +3,29 @@
     <thead>
         <tr>
             <th scope="col">Day</th>
+            <th scope="col">Day of the Week</th>
             <th scope="col">Pick Up Status</th>
+            <th scope="col">Remove</th>
+
         </tr>
     </thead>
     <tbody>
        @for (int i = 0; i < Model.Days.Count; i++)
        {
         <tr>
-            <th scope="row"> @Model.Days[i].Date</th>
+            <th scope="row"> @Model.Days[i].Date.ToShortDateString() </th>
+            <td>
+                @Model.Days[i].Date.DayOfWeek
+            </td>
             <td>
                 <div class="checkbox">
                     @Html.CheckBoxFor(m => m.Days[i].HasPickUp)
                     <label> Has Pick Up Scheduled </label>
                 </div>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger">Danger</button>
+                @*add action to remove this exact date from the list*@ 
             </td>
         </tr>
        }       

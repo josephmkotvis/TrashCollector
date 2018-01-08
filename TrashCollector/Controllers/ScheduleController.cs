@@ -66,7 +66,7 @@ namespace TrashCollector.Controllers
                 }
 
             };
-            return View(WorkSchedule);
+            return View(user);
         }
     }
 }

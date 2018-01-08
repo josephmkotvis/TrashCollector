@@ -266,6 +266,8 @@
     <Content Include="Views\Schedule\_Calender.cshtml" />
     <Content Include="Views\Schedule\Employee.cshtml" />
     <Content Include="Views\Schedule\_EmployeeCalender.cshtml" />
+    <Content Include="Views\Schedule\AddPickUp.cshtml" />
+    <Content Include="Views\Schedule\RemovePickUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
