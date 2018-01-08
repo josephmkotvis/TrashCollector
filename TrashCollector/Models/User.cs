@@ -18,5 +18,7 @@ namespace TrashCollector.Models
         public string State { get; set; }
         public int Zipcode { get; set; }
         public bool IsEmployed { get; set; }
+        public int MonthlyDebt { get; set; }
+        public List<Day> Days { get; set; }
     }
 }
