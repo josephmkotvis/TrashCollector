@@ -6,14 +6,14 @@ namespace TrashCollector.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class initmigration : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
+    public sealed partial class addmigrationAddedDays : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initmigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addmigrationAddedDays));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801090459374_init migration"; }
+            get { return "201801091620123_add-migration AddedDays"; }
         }
         
         string IMigrationMetadata.Source

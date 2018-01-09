@@ -10,19 +10,32 @@ using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
-    public class ScheduleController: Controller
+    public class ScheduleController : Controller
     {
         public ActionResult Index()
         {
-            return View();
-        }
-        public ActionResult AddPickUp()
-        {
-            return View();
+            var user = System.Web.HttpContext.Current.User;
+            return View(user );
         }
         public ActionResult EmployeeWorkSchedule()
         {
-            for
+            var db = new ApplicationDbContext();
+            var todaySchedule = new WorkScheduleViewModel();
+            foreach (UserDay userday in db.UserDays)
+            {
+                foreach(Day day in db.Days)
+                {
+                    if (userday.Day.Date == day.Date)
+                    {
+                        todaySchedule.Customers.ToList();
+                    }
+                }
+            }
+            todaySchedule.Employee = db.Users.FirstOrDefault();
+                return View();
+        }
+        public ActionResult AddPickUp()
+        {
             return View();
         }
         public ActionResult RemovePickUp()

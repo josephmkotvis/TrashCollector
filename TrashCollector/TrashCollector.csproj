@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E6DFC1ED-B883-4048-98D5-0BC0FEF3378B}</ProjectGuid>
+    <ProjectGuid>{B4967077-537E-4E45-95B4-B7EBE13EA06A}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -196,13 +196,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801091534055_InitialModel.cs" />
+    <Compile Include="Migrations\201801091534055_InitialModel.Designer.cs">
+      <DependentUpon>201801091534055_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801091620123_add-migration AddedDays.cs" />
+    <Compile Include="Migrations\201801091620123_add-migration AddedDays.Designer.cs">
+      <DependentUpon>201801091620123_add-migration AddedDays.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801091621052_AddedUserDays.cs" />
+    <Compile Include="Migrations\201801091621052_AddedUserDays.Designer.cs">
+      <DependentUpon>201801091621052_AddedUserDays.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserDay.cs" />
-    <Compile Include="Models\WorkSCheduleViewModel.cs" />
+    <Compile Include="Models\WorkScheduleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -264,11 +277,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Schedule\RemovePickUp.cshtml" />
+    <Content Include="Views\Schedule\AddPickUp.cshtml" />
     <Content Include="Views\Schedule\_Calander.cshtml" />
     <Content Include="Views\Schedule\_EmployeeCalander.cshtml" />
-    <Content Include="Views\Schedule\AddPickUp.cshtml" />
     <Content Include="Views\Schedule\EmployeeWorkSchedule.cshtml" />
-    <Content Include="Views\Schedule\RemovePickUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -286,6 +299,17 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801091534055_InitialModel.resx">
+      <DependentUpon>201801091534055_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801091620123_add-migration AddedDays.resx">
+      <DependentUpon>201801091620123_add-migration AddedDays.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801091621052_AddedUserDays.resx">
+      <DependentUpon>201801091621052_AddedUserDays.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -302,9 +326,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50573</DevelopmentServerPort>
+          <DevelopmentServerPort>50993</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50573/</IISUrl>
+          <IISUrl>http://localhost:50993/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -20,7 +20,8 @@ namespace TrashCollector.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        new DbSet<User> Users { get; set; }
+        public DbSet<Day> Days { get; set; }
+        public DbSet<UserDay> UserDays { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

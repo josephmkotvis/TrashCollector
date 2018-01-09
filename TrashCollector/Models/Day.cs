@@ -8,7 +8,6 @@ namespace TrashCollector.Models
 {
     public class Day
     {
-        [Key]
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public bool HasPickUp { get; set; }

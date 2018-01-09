@@ -1,18 +1,18 @@
 ﻿@*@model TrashCollector.Models.User
-@{
-    ViewBag.Title = "AddPickUp";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    @{
+        ViewBag.Title = "AddPickUp";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-<h2>AddPickUp</h2>
-<div class="form-group">
-    @Html.LabelFor(m => m.Days[m.Days.Count + 1].Date, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-        @Html.TextBoxFor(m => m.Days[m.Days.Count + 1].Date, new { @class = "form-control" })
+    <h2>AddPickUp</h2>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Days[m.Days.Count + 1].Date, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Days[m.Days.Count + 1].Date, new { @class = "form-control" })
+        </div>
     </div>
-</div>
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" class="btn btn-default" value="Add Pick Up Date" />
-    </div>
-</div>*@
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Add Pick Up Date" />
+        </div>
+    </div>*@
