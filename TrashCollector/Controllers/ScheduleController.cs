@@ -14,8 +14,24 @@ namespace TrashCollector.Controllers
     {
         public ActionResult Index()
         {
-            var user = System.Web.HttpContext.Current.User;
-            return View(user );
+            var _context = new ApplicationDbContext();
+            var currentSchedule = new CustomerScheduleViewModel();
+            var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            foreach(ApplicationUser user in _context.Users)
+            {
+                if (user.Id == currentUserId)
+                {
+                    currentSchedule.User = user;
+                }
+            }
+            foreach (UserDay userday in _context.UserDays)
+            {
+                if ((userday.User.Id == currentUserId) && (userday.Day.Date == DateTime.Now.Date))
+                {
+                    currentSchedule.Days.Add(userday.Day);
+                }
+            }
+            return View(currentSchedule);
         }
         public ActionResult EmployeeWorkSchedule()
         {
@@ -35,7 +51,7 @@ namespace TrashCollector.Controllers
                 {
                     if (userday.Day.Date == day.Date)
                     {
-                        currentDayWorkSchedule.Customers.ToList();
+                        currentDayWorkSchedule.CustomersAndDays.Add(userday);
                     }
                 }
             }

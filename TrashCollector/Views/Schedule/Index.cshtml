@@ -1,20 +1,21 @@
-﻿@model TrashCollector.Models.User
+﻿@model TrashCollector.Models.CustomerScheduleViewModel
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
-@if (Model.MonthlyDebt == 0)
+@if (Model.User.MonthlyDebt == 0)
 {
     <p> You currently do not owe anything for this month</p>
 }
 else
 {
-    <p> Your current total cost for all pick ups this month is @Model.MonthlyDebt </p>
+    <p> Your current total cost for all pick ups this month is @Model.User.MonthlyDebt </p>
 }
-@Html.Partial("_Calender")
-@if (Model.IsEmployed == true)
+@Html.Partial("_Calander")
+@if (Model.User.IsEmployed == true)
 {
     <p> Click @Html.ActionLink("Here", "EmployeeWorkSchedule", "Schedule") for the houses that need trash pick up.</p>
 }

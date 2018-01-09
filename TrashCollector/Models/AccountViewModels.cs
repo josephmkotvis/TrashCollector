@@ -90,13 +90,13 @@ namespace TrashCollector.Models
         public string City { get; set; }
 
         [Display(Name = "State")]
-        public string State;
+        public string State { get; set; }
 
         [Display(Name = "Zipcode")]
-        public int Zipcode;
+        public string Zipcode { get; set; } 
 
         [Display(Name = "Are you an employee")]
-        public bool IsEmployed;
+        public bool IsEmployed { get; set; }
 
     }
 

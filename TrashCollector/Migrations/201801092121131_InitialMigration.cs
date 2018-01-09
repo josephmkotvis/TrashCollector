@@ -3,10 +3,20 @@ namespace TrashCollector.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialModel : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Days",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Date = c.DateTime(nullable: false),
+                        HasPickUp = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -31,10 +41,31 @@ namespace TrashCollector.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.UserDays",
+                c => new
+                    {
+                        UserDayId = c.Int(nullable: false, identity: true),
+                        Day_Id = c.Int(),
+                        User_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.UserDayId)
+                .ForeignKey("dbo.Days", t => t.Day_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
+                .Index(t => t.Day_Id)
+                .Index(t => t.User_Id);
+            
+            CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        FullName = c.String(),
+                        Address = c.String(),
+                        City = c.String(),
+                        State = c.String(),
+                        Zipcode = c.String(),
+                        IsEmployed = c.Boolean(nullable: false),
+                        MonthlyDebt = c.Int(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -46,13 +77,6 @@ namespace TrashCollector.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
-                        FullName = c.String(),
-                        Address = c.String(),
-                        City = c.String(),
-                        State = c.String(),
-                        Zipcode = c.Int(),
-                        IsEmployed = c.Boolean(),
-                        MonthlyDebt = c.Int(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
@@ -90,18 +114,24 @@ namespace TrashCollector.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UserDays", "User_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UserDays", "Day_Id", "dbo.Days");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.UserDays", new[] { "User_Id" });
+            DropIndex("dbo.UserDays", new[] { "Day_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.UserDays");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Days");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TrashCollector.Models
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public int Zipcode { get; set; }
+        public string Zipcode { get; set; }
         public bool IsEmployed { get; set; }
         public int MonthlyDebt { get; set; }
     }
