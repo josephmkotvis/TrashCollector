@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashCollector", "TrashCollector\TrashCollector.csproj", "{1FEFFE67-D871-42C3-8A06-A3B4E1875704}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashCollector", "TrashCollector\TrashCollector.csproj", "{E6DFC1ED-B883-4048-98D5-0BC0FEF3378B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1FEFFE67-D871-42C3-8A06-A3B4E1875704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FEFFE67-D871-42C3-8A06-A3B4E1875704}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FEFFE67-D871-42C3-8A06-A3B4E1875704}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1FEFFE67-D871-42C3-8A06-A3B4E1875704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6DFC1ED-B883-4048-98D5-0BC0FEF3378B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6DFC1ED-B883-4048-98D5-0BC0FEF3378B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6DFC1ED-B883-4048-98D5-0BC0FEF3378B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6DFC1ED-B883-4048-98D5-0BC0FEF3378B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C3754826-1DC9-4E9A-92D4-D393E960072F}
+		SolutionGuid = {822351D1-A092-48DE-BF0F-9B0698770C9F}
 	EndGlobalSection
 EndGlobal

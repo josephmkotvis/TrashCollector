@@ -18,16 +18,21 @@
                 @Model.Days[i].Date.DayOfWeek
             </td>
             <td>
-                <div class="checkbox">
-                    @Html.CheckBoxFor(m => m.Days[i].HasPickUp)
-                    <label> Has Pick Up Scheduled </label>
-                </div>
+                @if (Model.Days[i].HasPickUp == true)
+                {
+                    <p> Pick Up Scheduled</p>
+                }
+                else if (Model.Days[i].HasPickUp != true)
+                {
+                    <p> No Pick Up Scheduled</p>
+                }
             </td>
             <td>
                 <button type="button" class="btn btn-danger">Danger</button>
                 @*add action to remove this exact date from the list*@ 
             </td>
         </tr>
-       }       
+       }     
+       
     </tbody>
 </table>

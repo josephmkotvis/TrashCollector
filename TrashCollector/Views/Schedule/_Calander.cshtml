@@ -1,0 +1,38 @@
+﻿@model TrashCollector.Models.User
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Day of the Week</th>
+            <th scope="col">Pick Up Status</th>
+            <th scope="col">Remove</th>
+
+        </tr>
+    </thead>
+    @*<tbody>
+        @for (int i = 0; i < Model.Days.Count; i++)
+        {
+            <tr>
+                <th scope="row"> @Model.Days[i].Date.ToShortDateString() </th>
+                <td>
+                    @Model.Days[i].Date.DayOfWeek
+                </td>
+                <td>
+                    @if (Model.Days[i].HasPickUp == true)
+                    {
+                        <p> Pick Up Scheduled</p>
+                    }
+                    else if (Model.Days[i].HasPickUp != true)
+                    {
+                        <p> No Pick Up Scheduled</p>
+                    }
+                </td>
+                <td>*@
+                    @*<button type="button" class="btn btn-danger">Danger</button>*@
+                    @*add action to remove this exact date from the list*@
+                @*</td>
+            </tr>
+        }*@
+
+    @*</tbody>*@
+</table>

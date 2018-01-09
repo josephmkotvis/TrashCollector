@@ -8,7 +8,7 @@ namespace TrashCollector.Models
 {
     public class WorkScheduleViewModel
     {
-        public User Employee { get; set; }
-        public List<User> Customers  {get; set; }
+        public ApplicationUser Employee { get; set; }
+        public List<User> Customers { get; set; }
     }
 }
