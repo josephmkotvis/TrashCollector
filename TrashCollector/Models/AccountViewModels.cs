@@ -64,6 +64,9 @@ namespace TrashCollector.Models
 
     public class RegisterViewModel
     {
+        [Display (Name = "Full Name")]
+        public string FullName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,6 +82,22 @@ namespace TrashCollector.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Display (Name = "City")]
+        public string City { get; set; }
+
+        [Display(Name = "State")]
+        public string State;
+
+        [Display(Name = "Zipcode")]
+        public int Zipcode;
+
+        [Display(Name = "Are you an employee")]
+        public bool IsEmployed;
+
     }
 
     public class ResetPasswordViewModel

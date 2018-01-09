@@ -19,20 +19,27 @@ namespace TrashCollector.Controllers
         }
         public ActionResult EmployeeWorkSchedule()
         {
-            var db = new ApplicationDbContext();
-            var todaySchedule = new WorkScheduleViewModel();
-            foreach (UserDay userday in db.UserDays)
+            var _context = new ApplicationDbContext();
+            var currentDayWorkSchedule = new WorkScheduleViewModel();
+            var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            foreach(User user in _context.Users)
             {
-                foreach(Day day in db.Days)
+                if (user.Id == currentUserId)
+                {
+                    currentDayWorkSchedule.Employee = user;
+                }
+            }
+            foreach (UserDay userday in _context.UserDays)
+            {
+                foreach(Day day in _context.Days)
                 {
                     if (userday.Day.Date == day.Date)
                     {
-                        todaySchedule.Customers.ToList();
+                        currentDayWorkSchedule.Customers.ToList();
                     }
                 }
             }
-            todaySchedule.Employee = db.Users.FirstOrDefault();
-                return View();
+                return View(currentDayWorkSchedule);
         }
         public ActionResult AddPickUp()
         {
