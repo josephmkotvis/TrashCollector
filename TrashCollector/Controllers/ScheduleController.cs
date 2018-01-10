@@ -13,13 +13,17 @@ namespace TrashCollector.Controllers
 {
     public class ScheduleController : Controller
     {
+        ApplicationDbContext db;
+        public ScheduleController()
+        {
+            db = new ApplicationDbContext();
+        }
         [Authorize]
         public ActionResult Index()
         {
-            var _context = new ApplicationDbContext();
             var currentSchedule = new CustomerScheduleViewModel();
             var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-            foreach(ApplicationUser user in _context.Users)
+            foreach(ApplicationUser user in db.Users)
             {
                 if (user.Id == currentUserId)
                 {
@@ -29,7 +33,7 @@ namespace TrashCollector.Controllers
             currentSchedule.PastDays = new List<UserDay>();
             currentSchedule.FutureDays = new List<UserDay>();
             currentSchedule.CanceledDays = new List<UserDay>();
-            var Days = (from x in _context.UserDays where x.User.Id == currentUserId select x).ToList();
+            var Days = (from x in db.UserDays.Include("Day") where x.User.Id == currentUserId select x).ToList();
             foreach (UserDay userday in Days)
             {
                 if (userday.HasPickUpRequested == true && userday.WasPickedUp == false) 
@@ -49,10 +53,10 @@ namespace TrashCollector.Controllers
         }
         public ActionResult EmployeeWorkSchedule()
         {
-            var _context = new ApplicationDbContext();
+
             var currentDayWorkSchedule = new WorkScheduleViewModel();
             var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-            foreach(ApplicationUser user in _context.Users)
+            foreach(ApplicationUser user in db.Users)
             {
                 if (user.Id == currentUserId)
                 {
@@ -60,14 +64,12 @@ namespace TrashCollector.Controllers
                 }
             }
             currentDayWorkSchedule.CustomersAndDays = new List<UserDay>();
-            foreach (UserDay userday in _context.UserDays)
+            var Days = (from x in db.UserDays.Include("Day") where x.User.Zipcode == currentDayWorkSchedule.Employee.Zipcode select x).ToList();
+            foreach (UserDay userday in Days)
             {
-                foreach(Day day in _context.Days)
+                if (userday.HasPickUpRequested == true && userday.WasPickedUp == false && userday.Day.Date.Date == DateTime.Now.Date) 
                 {
-                    if (userday.Day.Date == day.Date)
-                    {
-                        currentDayWorkSchedule.CustomersAndDays.Add(userday);
-                    }
+                    currentDayWorkSchedule.CustomersAndDays.Add(userday);
                 }
             }
                 return View(currentDayWorkSchedule);
@@ -75,16 +77,17 @@ namespace TrashCollector.Controllers
         [HttpGet]
         public ActionResult AddPickUp()
         {
-            return View();
+            AddPickUpViewModel model = new AddPickUpViewModel();
+            model.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            return View(model);
         }
         [HttpPost]
-        public ActionResult AddPickUp (AddPickUpViewModel RETURNFORM)
+        public ActionResult AddPickUp (AddPickUpViewModel model)
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-                var newPickUp = new UserDay
-                {
-                    User = (from x in db.Users where x.Id == RETURNFORM.UserId select x).FirstOrDefault(),
-                    Day = RETURNFORM.Day,
+            var newPickUp = new UserDay
+            {
+                User = (from x in db.Users where x.Id == model.UserId select x).FirstOrDefault(),
+                Day = GetDate(model.SelectedDate)
                 };
             newPickUp.HasPickUpRequested = true;
             newPickUp.WasPickedUp = false;
@@ -92,23 +95,51 @@ namespace TrashCollector.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Schedule");
         }
+
+        private Day GetDate(string selectedDate)
+        {
+            DateTime date = DateTime.Parse(selectedDate);
+            var dayList = (from x in db.Days where x.Date == date select x).ToList();
+            if(dayList.Count > 0)
+            {
+                return dayList[0];
+            }
+            else
+            {
+                Day day = new Day();
+                day.Date = date;
+                db.Days.Add(day);
+                db.SaveChanges();
+                var returnDay = (from x in db.Days where x.Date == date select x).FirstOrDefault();
+                return returnDay;
+            }
+        }
+
         public ActionResult CustomerRemovePickUp(int id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var RemovedPickUp = (from x in db.UserDays where x.UserDayId == id select x).FirstOrDefault();
-            RemovedPickUp.HasPickUpRequested = true;
+            RemovedPickUp.HasPickUpRequested = false;
             RemovedPickUp.WasPickedUp = false;
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Index");
         }
         public ActionResult EmployeeCompletePickUp(int id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var RemovedPickUp = (from x in db.UserDays where x.UserDayId == id select x).FirstOrDefault();
+            var RemovedPickUp = (from x in db.UserDays.Include("User") where x.UserDayId == id select x).FirstOrDefault();
             RemovedPickUp.HasPickUpRequested = true;
             RemovedPickUp.WasPickedUp = true;
             db.SaveChanges();
-            return View();
+            BillCustomer(RemovedPickUp.User.Id);
+            return RedirectToAction("EmployeeWorkSchedule", "Schedule");
+        }
+
+        private void BillCustomer(string id)
+        {
+            var user = (from x in db.Users where x.Id == id select x).FirstOrDefault();
+            user.MonthlyDebt += 50;
+            db.SaveChanges();
         }
     }
 }

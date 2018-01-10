@@ -3,22 +3,24 @@
     ViewBag.Title = "AddPickUp";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm("AddPickUp", "Schedule", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <h4> Create a new pick up date</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    @Html.Partial("_DatePicker")
-    @Html.LabelFor(m => m.Day)
-    @Html.TextBoxFor(m => m.Day, new { @id = "datepicker"})
+   <label> Select Day</label>
+    @Html.TextBoxFor(m => m.SelectedDate, new { @id = "datepicker" })
 
     @Html.HiddenFor(m => m.UserId)
-    <br/>
-    <br/>
+    <br />
+    <br />
+    <hr />
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.Partial("_DatePicker")
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="AddPickUp" label ="Add Pick Up "/>
+            <input type="submit" class="btn btn-default" value="Submit" label="Add Pick Up " />
         </div>
     </div>
 

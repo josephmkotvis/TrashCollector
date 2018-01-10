@@ -34,6 +34,8 @@ else
         </tbody>
     </table>
 }
+<p>Your estimated Charges are $@(Model.FutureDays.Count*50)</p>
+
 @Html.ActionLink("Add Pick Up", "AddPickUp", "Schedule")
 @if (Model.PastDays.Count == 0)
 {
