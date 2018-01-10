@@ -21,7 +21,7 @@ else
             {
                 <tr>
                     <td>
-                        @Model.FutureDays[i].Day.Date
+                        @Model.FutureDays[i].Day.Date.ToString("MM/dd/yyyy")
                     </td>
                     <td>
                         @Model.FutureDays[i].Day.Date.DayOfWeek
@@ -56,7 +56,7 @@ else
         {
             <tr>
                 <td>
-                    @Model.PastDays[i].Day.Date
+                    @Model.PastDays[i].Day.Date.ToString("MM/dd/yyyy")
                 </td>
                 <td>
                     @Model.PastDays[i].Day.Date.DayOfWeek
@@ -85,7 +85,7 @@ else
         {
             <tr>
                 <td>
-                    @Model.CanceledDays[i].Day.Date
+                    @Model.CanceledDays[i].Day.Date.ToString("MM/dd/yyyy")
                 </td>
                 <td>
                     @Model.CanceledDays[i].Day.Date.DayOfWeek

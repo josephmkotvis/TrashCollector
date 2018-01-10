@@ -12,7 +12,7 @@
 }
 else
 {
-    <p> Your Account Balance is $@Model.User.MonthlyDebt @Html.ActionLink("Pay Balance","PayBalance", "Schedule")</p>
+    <p> Your Account Balance is $@Model.User.MonthlyDebt @Html.ActionLink("Pay Balance","PayBalance", "Schedule", new { id = Model.User.Id }, null)</p>
 }
 @Html.Partial("_Calander")
 @if (Model.User.IsEmployed == true)

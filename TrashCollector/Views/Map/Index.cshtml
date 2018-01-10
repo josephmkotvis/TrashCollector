@@ -1,4 +1,4 @@
-﻿
+﻿@model TrashCollector.Models.MapViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -7,18 +7,32 @@
 
 <div id="map"></div>
 <script>
-      function initMap() {
-        var uluru = ;
+    var latlng = { lat: -25.363, lng: 131.044 };
+    var settings = {
+        "async": true,
+        "url": "https://maps.googleapis.com/maps/api/geocode/json?address=@Model.Address&key=AIzaSyDZlX5I49e93p_7mgKOzJJ21hvsmcgPtF4",
+        "method": "GET",
+ 
+    }
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        latlng = response.results[0].geometry.location;
+    });
+    var address = @Html.Raw(Json.Encode(Model.Address));
+    function initMap() {
+        var uluru = latlng;
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
+            zoom: 4,
+            center: uluru
         });
         var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
+            position: uluru,
+            map: map
         });
-      }
+    }
+
 </script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZlX5I49e93p_7mgKOzJJ21hvsmcgPtF4&callback=initMap">
 </script>

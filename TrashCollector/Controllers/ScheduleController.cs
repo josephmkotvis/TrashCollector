@@ -126,7 +126,6 @@ namespace TrashCollector.Controllers
         }
         public ActionResult EmployeeCompletePickUp(int id)
         {
-            ApplicationDbContext db = new ApplicationDbContext();
             var RemovedPickUp = (from x in db.UserDays.Include("User") where x.UserDayId == id select x).FirstOrDefault();
             RemovedPickUp.HasPickUpRequested = true;
             RemovedPickUp.WasPickedUp = true;
@@ -140,6 +139,14 @@ namespace TrashCollector.Controllers
             var user = (from x in db.Users where x.Id == id select x).FirstOrDefault();
             user.MonthlyDebt += 50;
             db.SaveChanges();
+        }
+        public ActionResult PayBalance()
+        {
+            var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var debtRemoved = (from x in db.Users where x.Id == currentUserId select x).FirstOrDefault();
+            debtRemoved.MonthlyDebt = 0;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
