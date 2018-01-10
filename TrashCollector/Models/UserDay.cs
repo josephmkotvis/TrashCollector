@@ -10,8 +10,10 @@ namespace TrashCollector.Models
     {
         [Key]
         public int UserDayId { get; set; }
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
         public Day Day { get; set; }
+        public bool HasPickUpRequested { get; set; }
+        public bool WasPickedUp { get; set; }
 
     }
 }

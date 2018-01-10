@@ -1,45 +1,94 @@
 ﻿
 @model TrashCollector.Models.CustomerScheduleViewModel
 
-@if (Model.Days.Count == 0)
+@if (Model.FutureDays.Count == 0)
 {
     <p> You currently do not have any pickups scheduled.</p>
 }
 else
 {
+    <p> Here are your future pick ups. </p>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">Day</th>
                 <th scope="col">Day of the Week</th>
-                <th scope="col">Pick Up Status</th>
                 <th scope="col">Remove</th>
             </tr>
         </thead>
         <tbody>
-            @for (int i = 0; i < Model.Days.Count; i++)
+            @for (int i = 0; i < Model.FutureDays.Count; i++)
             {
                 <tr>
-                    <th scope="row"> @Model.Days[i].Date.ToShortDateString() </th>
                     <td>
-                        @Model.Days[i].Date.DayOfWeek
+                        @Model.FutureDays[i].Day.Date
                     </td>
                     <td>
-                        @if (Model.Days[i].HasPickUp == true)
-                        {
-                            <p> Pick Up Scheduled</p>
-                        }
-                        else if (Model.Days[i].HasPickUp != true)
-                        {
-                            <p> No Pick Up Scheduled</p>
-                        }
+                        @Model.FutureDays[i].Day.Date.DayOfWeek
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger">Danger</button>
-                        @*add action to remove this exact date from the list*@
+                        @Html.ActionLink("Remove", "CustomerRemovePickUp", "Schedule", new { id = Model.FutureDays[i].UserDayId }, null)
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 }
+@Html.ActionLink("Add Pick Up", "AddPickUp", "Schedule")
+@if (Model.PastDays.Count == 0)
+{
+    <p> You do not have any previous pick ups.</p>
+}
+else
+{
+    <p> Here are your previous pick ups.</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Day of the Week</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.PastDays.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Model.PastDays[i].Day.Date
+                </td>
+                <td>
+                    @Model.PastDays[i].Day.Date.DayOfWeek
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+@if (Model.CanceledDays.Count == 0)
+{
+    <p> You do not have any canceled pick ups.</p>
+}
+else
+{
+    <p> Here are your previous cancellations.</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Day of the Week</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.CanceledDays.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Model.CanceledDays[i].Day.Date
+                </td>
+                <td>
+                    @Model.CanceledDays[i].Day.Date.DayOfWeek
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>}

@@ -1,18 +1,34 @@
-﻿@*@model TrashCollector.Models.User
-    @{
-        ViewBag.Title = "AddPickUp";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+﻿@model TrashCollector.Models.AddPickUpViewModel
+@{
+    ViewBag.Title = "AddPickUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("AddPickUp", "Schedule", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h4> Create a new pick up date</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.Partial("_DatePicker")
+    @Html.LabelFor(m => m.Day)
+    @Html.TextBoxFor(m => m.Day, new { @id = "datepicker"})
 
-    <h2>AddPickUp</h2>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Days[m.Days.Count + 1].Date, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Days[m.Days.Count + 1].Date, new { @class = "form-control" })
-        </div>
-    </div>
+    @Html.HiddenFor(m => m.UserId)
+    <br/>
+    <br/>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Add Pick Up Date" />
+            <input type="submit" class="btn btn-default" value="AddPickUp" label ="Add Pick Up "/>
         </div>
-    </div>*@
+    </div>
+
+
+}
+
+
+
+
+
+
+
+

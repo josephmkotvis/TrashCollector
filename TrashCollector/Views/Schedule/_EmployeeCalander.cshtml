@@ -13,7 +13,7 @@
     <tbody>
         @for (int i = 0; i < Model.CustomersAndDays.Count; i++)
         {
-            if ((Model.CustomersAndDays[i].Day.Date == DateTime.Now.Date) &&(Model.CustomersAndDays[i].Day.HasPickUp == true) && (Model.CustomersAndDays[i].User.Zipcode == Model.Employee.Zipcode))
+            if ((Model.CustomersAndDays[i].Day.Date == DateTime.Now.Date) &&(Model.CustomersAndDays[i].HasPickUpRequested == true) && (Model.CustomersAndDays[i].User.Zipcode == Model.Employee.Zipcode))
             {
                     <tr>
                         <th scope="row"> @Model.CustomersAndDays[i].User.Address</th>

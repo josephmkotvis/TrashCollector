@@ -200,12 +200,17 @@
     <Compile Include="Migrations\201801092121131_InitialMigration.Designer.cs">
       <DependentUpon>201801092121131_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801100436417_Moved pick up variables to userday table.cs" />
+    <Compile Include="Migrations\201801100436417_Moved pick up variables to userday table.Designer.cs">
+      <DependentUpon>201801100436417_Moved pick up variables to userday table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CustomerScheduleViewModel.cs" />
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\AddPickUpViewModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserDay.cs" />
     <Compile Include="Models\WorkScheduleViewModel.cs" />
@@ -275,6 +280,7 @@
     <Content Include="Views\Schedule\_Calander.cshtml" />
     <Content Include="Views\Schedule\_EmployeeCalander.cshtml" />
     <Content Include="Views\Schedule\EmployeeWorkSchedule.cshtml" />
+    <Content Include="Views\Schedule\_DatePicker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -295,6 +301,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801092121131_InitialMigration.resx">
       <DependentUpon>201801092121131_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801100436417_Moved pick up variables to userday table.resx">
+      <DependentUpon>201801100436417_Moved pick up variables to userday table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
